@@ -10,7 +10,7 @@ public class AppDbContext : DbContext
     //tem que se conectar? qual o servidor? como que é a forma de autenticação?
     //Ao criar o construtor, basicamente quando a gente instância essa classe, a gente já passa as opções.
     //Ele recebe as opções de configuração
-    public AppDbContext(DbContextOptions<DbContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 }
