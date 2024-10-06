@@ -17,4 +17,10 @@ public class LivroController : Controller
 
         return View(livros);
     }
+
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        return View();
+    }
 }
