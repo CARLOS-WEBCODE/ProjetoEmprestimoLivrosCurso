@@ -25,6 +25,18 @@ public class LivroController : Controller
         return View();
     }
 
+    [HttpGet]
+    public async Task<ActionResult> Detalhes(int? id)
+    {
+        if(id != null)
+        {
+            var livro = await _livroInterface.BuscarLivroPorId(id);
+            return View(livro);
+        }
+        return RedirectToAction("Index");
+    }
+
+
     [HttpPost]
     public async Task<ActionResult> Cadastrar(LivroCriacaoDto livrosCriacaoDto, IFormFile foto)
     {

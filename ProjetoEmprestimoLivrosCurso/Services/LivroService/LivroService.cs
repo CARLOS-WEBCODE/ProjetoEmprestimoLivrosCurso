@@ -18,6 +18,21 @@ public class LivroService : ILivroInterface
         _caminhoServidor = sistema.WebRootPath;
         _mapper = mapper;
     }
+
+    public async Task<LivrosModel> BuscarLivroPorId(int? id)
+    {
+        try
+        {
+            var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == id);
+
+            return livro;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
     public async Task<List<LivrosModel>> BuscarLivros()
     {
         try
