@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoEmprestimoLivrosCurso.Dto;
 using ProjetoEmprestimoLivrosCurso.Models;
 using ProjetoEmprestimoLivrosCurso.Services.LivroService;
 
@@ -22,5 +23,34 @@ public class LivroController : Controller
     public ActionResult Cadastrar()
     {
         return View();
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Cadastrar(LivroCriacaoDto livrosCriacaoDto, IFormFile foto)
+    {
+        if (foto != null)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                if (!_livroInterface.VerificaSeJaExisteCadastro(livrosCriacaoDto))
+                {
+                    return View(livrosCriacaoDto);
+                }
+
+                var livro = await _livroInterface.Cadastrar(livrosCriacaoDto, foto);
+
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return View(livrosCriacaoDto);
+            }
+        }
+        else
+        {
+            return View(livrosCriacaoDto);
+        }
     }
 }
