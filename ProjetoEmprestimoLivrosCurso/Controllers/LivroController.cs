@@ -35,21 +35,25 @@ public class LivroController : Controller
                 
                 if (!_livroInterface.VerificaSeJaExisteCadastro(livrosCriacaoDto))
                 {
+                    TempData["MensagemErro"] = "Código ISBN já cadastrado!";
                     return View(livrosCriacaoDto);
                 }
 
                 var livro = await _livroInterface.Cadastrar(livrosCriacaoDto, foto);
 
+                TempData["MensagemSucesso"] = "Livro cadastrado com sucesso!";
                 return RedirectToAction("Index");
 
             }
             else
             {
+                TempData["MensagemErro"] = "Verifique os dados preenchidos!";
                 return View(livrosCriacaoDto);
             }
         }
         else
         {
+            TempData["MensagemErro"] = "Incluir uma imagem de capa!";
             return View(livrosCriacaoDto);
         }
     }
