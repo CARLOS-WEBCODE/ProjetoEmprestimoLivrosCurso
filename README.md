@@ -1,4 +1,5 @@
 # Sistema de Empréstimo de Livros
+### Curso: Do Zero à Maestria: Dominando .NET 6 MVC de Ponta a Ponta (Cris Tech)
 Este projeto é um sistema web desenvolvido em .NET 6 MVC para gerenciar o empréstimo de livros em uma biblioteca. O sistema permite o cadastro de livros, gerenciamento de usuários e controle de empréstimos e devoluções.
 
 ### Funcionalidades
@@ -19,4 +20,29 @@ SQL Server
 Visual Studio 2022 ou superior
 
 ### Instalação
-Clone o repositório:
+### Clone o repositório:
+
+git clone https://github.com/seu-usuario/sistema-emprestimo-livros.git
+
+### Navegue até a pasta do projeto:
+
+cd sistema-emprestimo-livros
+
+### Restaure as dependências do projeto:
+
+dotnet restore
+
+### Configure a string de conexão no arquivo appsettings.json com as credenciais do seu banco de dados SQL Server:
+
+"ConnectionStrings": {
+  "DefaultConnection": "Server=seu-servidor;Database=seu-banco;User Id=seu-usuario;Password=sua-senha;"
+}
+
+
+### Execute as migrações para criar o banco de dados:
+
+dotnet ef database update
+
+### Execute o projeto:
+
+dotnet run
