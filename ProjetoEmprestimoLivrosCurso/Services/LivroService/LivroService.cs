@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ProjetoEmprestimoLivrosCurso.Data;
 using ProjetoEmprestimoLivrosCurso.Dto;
 using ProjetoEmprestimoLivrosCurso.Models;
@@ -8,12 +9,14 @@ namespace ProjetoEmprestimoLivrosCurso.Services.LivroService;
 public class LivroService : ILivroInterface
 {
     private readonly AppDbContext _context;
+    private readonly IMapper _mapper;
     private string _caminhoServidor;
 
-    public LivroService(AppDbContext context, IWebHostEnvironment sistema)
+    public LivroService(AppDbContext context, IWebHostEnvironment sistema, IMapper mapper)
     {
         _context = context;
         _caminhoServidor = sistema.WebRootPath;
+        _mapper = mapper;
     }
     public async Task<List<LivrosModel>> BuscarLivros()
     {
@@ -47,17 +50,20 @@ public class LivroService : ILivroInterface
                 foto.CopyToAsync(stream).Wait();
             }
 
-            var livro = new LivrosModel
-            {
-                Titulo = livroCriacaoDto.Titulo,
-                Capa = nomeCaminhoDaImagem,
-                Autor = livroCriacaoDto.Autor,
-                Descricao = livroCriacaoDto.Descricao,
-                QuantidadeEmEstoque = livroCriacaoDto.QuantidadeEmEstoque,
-                AnoPublicacao = livroCriacaoDto.AnoPublicacao,
-                ISBN = livroCriacaoDto.ISBN,
-                Genero = livroCriacaoDto.Genero
-            };
+            //var livro = new LivrosModel
+            //{
+            //    Titulo = livroCriacaoDto.Titulo,
+            //    Capa = nomeCaminhoDaImagem,
+            //    Autor = livroCriacaoDto.Autor,
+            //    Descricao = livroCriacaoDto.Descricao,
+            //    QuantidadeEmEstoque = livroCriacaoDto.QuantidadeEmEstoque,
+            //    AnoPublicacao = livroCriacaoDto.AnoPublicacao,
+            //    ISBN = livroCriacaoDto.ISBN,
+            //    Genero = livroCriacaoDto.Genero
+            //};
+
+            var livro = _mapper.Map<LivrosModel>(livroCriacaoDto);
+            livro.Capa = nomeCaminhoDaImagem;
 
             _context.Add(livro);
             await _context.SaveChangesAsync();
