@@ -9,5 +9,6 @@ public class ProfileAutoMapper : Profile
     public ProfileAutoMapper()
     {
         CreateMap<LivroCriacaoDto,LivrosModel>();
+        CreateMap<LivrosModel, LivroEdicaoDto>();
     }
 }
