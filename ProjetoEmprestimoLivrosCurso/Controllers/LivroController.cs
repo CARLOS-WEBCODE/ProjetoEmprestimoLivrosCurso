@@ -48,7 +48,7 @@ public class LivroController : Controller
             var livro = await _livroInterface.BuscarLivroPorId(id);
             var livroEdicaoDto = _mapper.Map<LivroEdicaoDto>(livro);
 
-            return View(livro);
+            return View(livroEdicaoDto);
         }
         return RedirectToAction("Index");
     }

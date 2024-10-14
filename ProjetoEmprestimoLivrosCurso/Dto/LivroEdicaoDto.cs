@@ -9,6 +9,9 @@ public class LivroEdicaoDto
     [Required(ErrorMessage = "Insira um título!")]
     public string Titulo { get; set; } = string.Empty; //significa que é uma string vazia
 
+    [Required(ErrorMessage = "Insira uma capa!")]
+    public string Capa { get; set; }
+
     [Required(ErrorMessage = "Insira uma descrição!")]
     public string Descricao { get; set; } = string.Empty;
 
